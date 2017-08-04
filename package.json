@@ -1,0 +1,16 @@
+{
+  "name": "ms-translate-cache",
+  "version": "1.0.0",
+  "description": "Microservice responsible to use an google api to translate text and save the results in cache",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "translate-cache",
+    "translate",
+    "redis-cache"
+  ],
+  "author": "Jackson Matos",
+  "license": "ISC"
+}
