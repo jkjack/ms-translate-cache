@@ -4,6 +4,7 @@
   "description": "Microservice responsible to use an google api to translate text and save the results in cache",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "test"
   },
   "keywords": [
