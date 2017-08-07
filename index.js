@@ -1,14 +1,17 @@
-var restify = require('restify');
-
-function respond(req, res, next) {
-  res.send('Response: ' + req.params.name);
-  next();
-}
+var restify =require('restify');
+const health = require('./healthCheck')
 
 var server = restify.createServer();
-server.get('/hello/:name', respond);
-server.head('/hello/:name', respond);
 
-server.listen(8080, function() {
+server.get('/healthCheck', respond(health.getHealthCheck()))
+
+function respond(method) {
+  return function(req, res, next) {
+    res.send(200, JSON.stringify(method))
+    return next();
+  }
+}
+
+server.listen(3000, function() {
   console.log('%s listening at %s', server.name, server.url);
 });
