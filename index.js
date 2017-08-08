@@ -1,13 +1,21 @@
 var restify =require('restify');
 const health = require('./healthCheck')
+const translateText = require('./service/translateText')
 
 var server = restify.createServer();
 
-server.get('/healthCheck', respond(health.getHealthCheck()))
+server.get('/healthCheck', respond(health.getHealthCheck))
+server.get('/translateText/:from/:to', respond(translateText.cacheTranslate))
 
-function respond(method) {
+function respond(action) {
   return function(req, res, next) {
-    res.send(200, JSON.stringify(method))
+    let ctx = {}
+    ctx.params = req.params
+    ctx.headers = req.headers
+
+    const result = action(ctx)
+
+    res.send(200, JSON.stringify(result))
     return next();
   }
 }
