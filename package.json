@@ -15,6 +15,7 @@
   "author": "Jackson Matos",
   "license": "ISC",
   "dependencies": {
-    "@google-cloud/translate": "^1.0.0"
+    "@google-cloud/translate": "^1.0.0",
+    "restify": "^5.0.1"
   }
 }
