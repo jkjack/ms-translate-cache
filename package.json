@@ -13,5 +13,8 @@
     "redis-cache"
   ],
   "author": "Jackson Matos",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@google-cloud/translate": "^1.0.0"
+  }
 }
