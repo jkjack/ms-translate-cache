@@ -57,3 +57,6 @@ typings/
 # dotenv environment variables file
 .env
 
+# google key
+path/to/keyfile.json
+
