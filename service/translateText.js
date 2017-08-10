@@ -20,15 +20,16 @@ const cacheTranslate = (ctx) => {
     from: originLanguage, // pt
     to: destinyLanguage // en
   }
-  translateClient.translate(text, translateOptions, function (err, translation) {
-    if (!err) {
-      console.log('***OK***')
-      console.log('TRANSLATED: ', translation)
-      return translation
-    }
-    console.log(err)
+  return new Promise((resolve, reject) => {
+    translateClient.translate(text, translateOptions, function (err, translation) {
+      if (!err) {
+        translated.text = translation
+        return resolve(translated)
+      }
+      console.log(err)
+      reject(err)
+    })
   })
-  return translated
 }
 
 module.exports = {
