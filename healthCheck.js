@@ -1,6 +1,6 @@
 
-function getHealthCheck(){
-    return true
+function getHealthCheck () {
+  return true
 }
 
 module.exports = {

@@ -60,3 +60,5 @@ typings/
 # google key
 path/to/keyfile.json
 
+# VScode configs
+.vscode/
