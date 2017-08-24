@@ -7,8 +7,8 @@ var translateClient = translate({
   keyFilename: './path/to/keyfile.json'
 })
 
-const getWordFromCache = (word) => {
-  return redisUtils.get('cache-translate', word)
+const getWordFromCache = (translated) => {
+  return redisUtils.get('cache-translate', `${translated.originLanguage}-${translated.destinyLanguage}-${translated.text}`)
 }
 
 const cacheTranslate = async (ctx) => {
@@ -23,7 +23,7 @@ const cacheTranslate = async (ctx) => {
     to: translated.destinyLanguage // en
   }
 
-  const cacheValue = await getWordFromCache(translated.text)
+  const cacheValue = await getWordFromCache(translated)
 
   if (cacheValue) {
     translated.text = cacheValue
@@ -37,7 +37,7 @@ const getFromTranslate = (translated, translateOptions) => {
   return new Promise((resolve, reject) => {
     translateClient.translate(translated.text, translateOptions, function (err, translation) {
       if (!err) {
-        redisUtils.set('cache-translate', translated.text, translation)
+        redisUtils.set('cache-translate', `${translated.originLanguage}-${translated.destinyLanguage}-${translated.text}`, translation)
         translated.text = translation
         return resolve(translated)
       }
