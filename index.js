@@ -25,11 +25,11 @@ function respondAsync (action) {
     let ctx = {}
     ctx.params = req.params
     ctx.headers = req.headers
-
+    
     action(ctx).then(result => {
       res.send(200, JSON.stringify(result))
-      return next()
-    })
+    })  
+    return next()
   }
 }
 

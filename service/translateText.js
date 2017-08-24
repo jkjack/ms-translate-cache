@@ -1,27 +1,41 @@
 
 var translate = require('@google-cloud/translate')
+const redisUtils = require('../db/redisUtil')
 
 var translateClient = translate({
   projectId: 'ms-cache-translate',
   keyFilename: './path/to/keyfile.json'
 })
 
-const cacheTranslate = (ctx) => {
-  const originLanguage = ctx.params.from
-  const destinyLanguage = ctx.params.to
-  const text = ctx.headers.text
+const getWordFromCache = (word) => {
+  return redisUtils.get('cache-translate', word)
+}
+
+const cacheTranslate = async (ctx) => {
   const translated = {
-    originLanguage,
-    destinyLanguage,
-    text
+    originLanguage: ctx.params.from,
+    destinyLanguage: ctx.params.to,
+    text: ctx.headers.text
   }
 
   let translateOptions = {
-    from: originLanguage, // pt
-    to: destinyLanguage // en
+    from: translated.originLanguage, // pt
+    to: translated.destinyLanguage // en
   }
+
+  const cacheValue = await getWordFromCache(translated.text)
+
+  if (cacheValue) {
+    translated.text = cacheValue
+    return translated
+  }
+  return await getFromTranslate(translated, translateOptions)
+}
+
+
+const getFromTranslate = (translated, translateOptions) => {
   return new Promise((resolve, reject) => {
-    translateClient.translate(text, translateOptions, function (err, translation) {
+    translateClient.translate(translated.text, translateOptions, function (err, translation) {
       if (!err) {
         translated.text = translation
         return resolve(translated)
