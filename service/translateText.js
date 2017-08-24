@@ -32,7 +32,6 @@ const cacheTranslate = async (ctx) => {
   return await getFromTranslate(translated, translateOptions)
 }
 
-
 const getFromTranslate = (translated, translateOptions) => {
   return new Promise((resolve, reject) => {
     translateClient.translate(translated.text, translateOptions, function (err, translation) {
