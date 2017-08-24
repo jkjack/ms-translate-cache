@@ -37,6 +37,7 @@ const getFromTranslate = (translated, translateOptions) => {
   return new Promise((resolve, reject) => {
     translateClient.translate(translated.text, translateOptions, function (err, translation) {
       if (!err) {
+        redisUtils.set('cache-translate', translated.text, translation)
         translated.text = translation
         return resolve(translated)
       }

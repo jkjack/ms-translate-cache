@@ -13,7 +13,20 @@ const get = (hash, key) => {
     })
 }
 
+const set = (hash, key, value) => {
+        return new Promise((resolve, reject) => {
+            redisCli().hset(hash, key, value, (err, entity) => {
+            if (err) {
+                console.log(`Fail hset hash: ${hash}, key: ${key}, value: ${value} `, { scope: 'Redis' })
+                reject(entity)
+            }
+            resolve(entity)
+        })
+    })
+}
+
 module.exports = {
-  get
+  get,
+  set
 }
 
