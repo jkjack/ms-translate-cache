@@ -1,7 +1,7 @@
 const expect = require('chai').expect
 const sinon = require('sinon')
-const redisUtils = require('../db/redisUtil')
-const translateText = require('../service/translateText')
+const redisUtils = require('../lib/db/redisUtil')
+const translateText = require('../lib/service/translateText')
 
 describe('Cache translate Tests', async () => {
     before(function(){

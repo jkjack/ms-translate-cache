@@ -1,7 +1,7 @@
 var restify = require('restify')
 const health = require('./healthCheck')
-const translateText = require('./service/translateText')
-const redis = require('./db/redisClient')
+const translateText = require('./lib/service/translateText')
+const redis = require('./lib/db/redisClient')
 
 var server = restify.createServer()
 
