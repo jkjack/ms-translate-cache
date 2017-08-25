@@ -1,15 +1,15 @@
-# ms-translate-cache
+# uservice-translate-cache
 Microservice responsible to use an google api to translate text and save the results in cache
 
 ### Installation
 
-ms-translate-cache use nvm to version control.
+uservice-translate-cache use nvm to version control.
 if you don't have nvm, install it [here](https://github.com/creationix/nvm/blob/master/README.md)
 
 Run:
 
 ```
-nvm use
+nvm install
 ```
 Install the node package modules used on project:
 ```
