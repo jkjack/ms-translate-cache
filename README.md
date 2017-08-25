@@ -17,6 +17,7 @@ npm install
 ```
 
 Insert your google key on file ./path/to/keyfile.json
-if you don't have a google key, you can create following this [google tutorial](https://github.com/GoogleCloudPlatform/google-cloud-node/blob/master/README.md) following Authentication > Elsewhere section
+
+If you don't have a google key, you can create following this [google tutorial](https://github.com/GoogleCloudPlatform/google-cloud-node/blob/master/README.md) following Authentication > Elsewhere section
 
 The last thing required is to run a local redis.
