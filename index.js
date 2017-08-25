@@ -35,5 +35,5 @@ function respondAsync (action) {
 
 server.listen(3000, function () {
   redis()
-  console.log('%s listening at %s', server.url)
+  console.log('%s listening', server.url)
 })

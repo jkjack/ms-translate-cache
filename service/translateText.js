@@ -1,8 +1,10 @@
+'use strict'
 
-var translate = require('@google-cloud/translate')
+const translate = require('@google-cloud/translate')
 const redisUtils = require('../db/redisUtil')
+const MAX_TEXT_LENGTH = 20
 
-var translateClient = translate({
+const translateClient = translate({
   projectId: 'ms-cache-translate',
   keyFilename: './path/to/keyfile.json'
 })
@@ -16,6 +18,10 @@ const cacheTranslate = async (ctx) => {
     originLanguage: ctx.params.from,
     destinyLanguage: ctx.params.to,
     text: ctx.headers.text
+  }
+
+  if (translated.text.length > MAX_TEXT_LENGTH) {
+    return {error: 'Text is too big'}
   }
 
   let translateOptions = {
